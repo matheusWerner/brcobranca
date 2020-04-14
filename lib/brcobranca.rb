@@ -150,6 +150,7 @@ module Brcobranca
       autoload :Sicredi,       'brcobranca/retorno/cnab240/sicredi'
       autoload :Sicoob,        'brcobranca/retorno/cnab240/sicoob'
       autoload :Caixa,         'brcobranca/retorno/cnab240/caixa'
+      autoload :BancoBrasil,   'brcobranca/retorno/cnab240/banco_brasil'
     end
   end
 

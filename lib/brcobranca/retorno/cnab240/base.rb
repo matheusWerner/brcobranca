@@ -21,6 +21,8 @@ module Brcobranca
             Brcobranca::Retorno::Cnab240::Sicredi.load_lines(file, options)
           when "756"
             Brcobranca::Retorno::Cnab240::Sicoob.load_lines(file, options)
+          when "001"
+            Brcobranca::Retorno::Cnab240::BancoBrasil.load_lines(file, options)            
           else
             Brcobranca::Retorno::RetornoCnab240.load_lines(file, options)
           end
