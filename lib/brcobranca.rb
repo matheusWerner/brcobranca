@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+ -*- encoding: utf-8 -*-
 #
 require 'brcobranca/calculo'
 require 'brcobranca/limpeza'
@@ -144,6 +144,7 @@ module Brcobranca
     end
 
     module Cnab240
+      raise Exception.new "This is an exception"
       autoload :Base,          'brcobranca/retorno/cnab240/base'
       autoload :Santander,     'brcobranca/retorno/cnab240/santander'
       autoload :Cecred,        'brcobranca/retorno/cnab240/cecred'
