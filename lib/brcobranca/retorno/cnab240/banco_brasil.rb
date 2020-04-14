@@ -1,3 +1,5 @@
+# -*- encoding: utf-8 -*-
+require 'parseline'
 module Brcobranca
   module Retorno
     module Cnab240
@@ -43,29 +45,29 @@ module Brcobranca
           attr_accessor :tipo_registro
 
           fixed_width_layout do |parse|
-            parse.field :codigo_registro, 8..8
-            parse.field :sequencial, 9..13
-            parse.field :tipo_registro, 14..14
-            parse.field :codigo_ocorrencia, 16..17
-            parse.field :agencia_com_dv, 18..23
-            parse.field :cedente_com_dv, 24..36
-            parse.field :nosso_numero, 38..57
-            parse.field :carteira, 58..58
-            parse.field :data_vencimento, 74..81
-            parse.field :valor_titulo, 82..96
-            parse.field :banco_recebedor, 97..99
-            parse.field :agencia_recebedora_com_dv, 100..105
-            parse.field :data_ocorrencia, 158..165
-            parse.field :data_credito, 146..153
-            parse.field :outras_despesas, 108..122
-            parse.field :iof_desconto, 63..77
-            parse.field :valor_abatimento, 48..62
-            parse.field :desconto_concedito, 33..47
-            parse.field :valor_recebido, 78..92
-            parse.field :juros_mora, 18..32
-            parse.field :outros_recebimento, 123..137
-            parse.field :valor_tarifa, 199..213
-            parse.field :motivo_ocorrencia, 214..223, ->(motivos) do
+            parse.field :codigo_registro, 7..7
+            parse.field :sequencial, 8..12
+            parse.field :tipo_registro, 13..13
+            parse.field :codigo_ocorrencia, 15..16
+            parse.field :agencia_com_dv, 17..22
+            parse.field :cedente_com_dv, 23..35
+            parse.field :nosso_numero, 37..56
+            parse.field :carteira, 57..57
+            parse.field :data_vencimento, 73..80
+            parse.field :valor_titulo, 81..95
+            parse.field :banco_recebedor, 96..98
+            parse.field :agencia_recebedora_com_dv, 99..104
+            parse.field :data_ocorrencia, 157..164
+            parse.field :data_credito, 145..152
+            parse.field :outras_despesas, 107..121
+            parse.field :iof_desconto, 62..76
+            parse.field :valor_abatimento, 47..61
+            parse.field :desconto_concedito, 32..46
+            parse.field :valor_recebido, 77..91
+            parse.field :juros_mora, 17..31
+            parse.field :outros_recebimento, 122..136
+            parse.field :valor_tarifa, 198..212
+            parse.field :motivo_ocorrencia, 213..222, ->(motivos) do
               motivos.scan(/.{2}/).reject(&:blank?).reject{|motivo| motivo == '00'}
             end
 
