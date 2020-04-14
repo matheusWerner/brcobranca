@@ -1,14 +1,17 @@
 # -*- encoding: utf-8 -*-
 require 'parseline'
 
+raise Exception.new "This is an exception"
+
 module Brcobranca
   module Retorno
     module Cnab240
+
       class Sicredi < Brcobranca::Retorno::Cnab240::Base
         # Regex para remoção de headers e trailers além de registros diferentes de T ou U
         REGEX_DE_EXCLUSAO_DE_REGISTROS_NAO_T_OU_U = /^((?!^.{7}3.{5}[T|U].*$).)*$/
 
-        raise 'Valor não pode ser negativo.'
+        raise Exception.new "This is an exception"
 
         def self.load_lines(file, options = {})
           default_options = { except: REGEX_DE_EXCLUSAO_DE_REGISTROS_NAO_T_OU_U }
