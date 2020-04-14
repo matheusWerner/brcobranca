@@ -8,6 +8,8 @@ module Brcobranca
         # Regex para remoção de headers e trailers além de registros diferentes de T ou U
         REGEX_DE_EXCLUSAO_DE_REGISTROS_NAO_T_OU_U = /^((?!^.{7}3.{5}[T|U].*$).)*$/
 
+        raise 'Valor não pode ser negativo.'
+
         def self.load_lines(file, options = {})
           default_options = { except: REGEX_DE_EXCLUSAO_DE_REGISTROS_NAO_T_OU_U }
           options = default_options.merge!(options)
