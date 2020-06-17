@@ -144,7 +144,6 @@ module Brcobranca
     end
 
     module Cnab240
-      raise Exception.new "Caiu aqui"
       autoload :Base,          'brcobranca/retorno/cnab240/base'
       autoload :Santander,     'brcobranca/retorno/cnab240/santander'
       autoload :Cecred,        'brcobranca/retorno/cnab240/cecred'
