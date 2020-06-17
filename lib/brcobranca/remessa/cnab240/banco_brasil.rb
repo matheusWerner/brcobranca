@@ -21,7 +21,6 @@ module Brcobranca
         def initialize(campos = {})
           campos = { emissao_boleto: '0',
             distribuicao_boleto: '0',
-            especie_titulo: '02',
             codigo_baixa: '00',}.merge!(campos)
           super(campos)
         end
@@ -53,7 +52,6 @@ module Brcobranca
           # para calcular o digito
           conta_corrente.modulo11(mapeamento: { 10 => 'X' }).to_s
         end
-
 
         def codigo_carteira
           codigo_carteira = carteira[1..2]
@@ -211,7 +209,7 @@ module Brcobranca
           # Obs.: O Banco do Brasil encaminha para protesto os seguintes títulos:
           # Duplicata Mercantil, Rural e de Serviço, Letra de Câmbio, e
           # Certidão de Dívida Ativa da União, dos Estados e do Município.
-          segmento_p << especie_titulo                                  # especie do titulo                     2
+          segmento_p << pagamento.especie_titulo.to_s.rjust(2,'0')      # especie do titulo                     2
           segmento_p << aceite                                          # aceite                                1
           segmento_p << pagamento.data_emissao.strftime('%d%m%Y')       # data de emissao titulo                8
           segmento_p << pagamento.tipo_mora                             # cod. do juros                         1
