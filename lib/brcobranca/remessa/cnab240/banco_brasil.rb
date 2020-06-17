@@ -22,8 +22,7 @@ module Brcobranca
           campos = { emissao_boleto: '0',
             distribuicao_boleto: '0',
             especie_titulo: '02',
-            codigo_baixa: '00',
-            codigo_carteira: '7',}.merge!(campos)
+            codigo_baixa: '00',}.merge!(campos)
           super(campos)
         end
 
@@ -53,6 +52,11 @@ module Brcobranca
           # utilizando a conta corrente com 5 digitos
           # para calcular o digito
           conta_corrente.modulo11(mapeamento: { 10 => 'X' }).to_s
+        end
+
+
+        def codigo_carteira
+          codigo_carteira[1, carteira.length]
         end
 
         def codigo_convenio
