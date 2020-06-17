@@ -56,7 +56,7 @@ module Brcobranca
 
 
         def codigo_carteira
-          codigo_carteira = copy(carteira,1, carteira.length)
+          codigo_carteira = carteira[1..2]
         end
 
         def codigo_convenio
