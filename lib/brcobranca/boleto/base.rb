@@ -103,7 +103,7 @@ module Brcobranca
           quantidade: 1,
           especie_documento: 'DM',
           especie: 'R$',
-          aceite: 'S',
+          aceite: 'N',
           valor: 0.0,
           local_pagamento: 'QUALQUER BANCO ATÉ O VENCIMENTO'
         }
