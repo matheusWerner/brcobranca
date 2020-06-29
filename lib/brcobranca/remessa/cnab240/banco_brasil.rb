@@ -21,8 +21,7 @@ module Brcobranca
         def initialize(campos = {})
           campos = { emissao_boleto: '0',
             distribuicao_boleto: '0',
-            codigo_baixa: '00',
-            aceite:'N',}.merge!(campos)
+            codigo_baixa: '00',}.merge!(campos)
           super(campos)
         end
 
