@@ -94,8 +94,9 @@ module Brcobranca
         #
         # @return [String]
         #
-        def nosso_numero
-          nosso_numero = "#{pagamento.nosso_numero}".adjust_size_to(13, '0', :right)
+
+        def formata_nosso_numero(nosso_numero)
+          "#{pagamento.nosso_numero}".adjust_size_to(13, '0', :right)
         end
 
         def identificador_titulo(nosso_numero)
