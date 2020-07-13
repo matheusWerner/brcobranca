@@ -95,7 +95,7 @@ module Brcobranca
         end
 
         def identificador_titulo(nosso_numero)
-          "#{formata_nosso_numero(nosso_numero)}".ljust(7, ' ')
+          "#{formata_nosso_numero(nosso_numero).ljust(7, ' ')}"
         end
 
         # Monta o registro segmento P do arquivo
