@@ -90,17 +90,8 @@ module Brcobranca
           "#{conta_corrente.rjust(12, '0')}#{digito_conta} #{identificador_titulo(pagamento.nosso_numero)}"
         end
 
-        # Retorna o nosso numero mais o digito verificador
-        #
-        # @return [String]
-        #
-
-        def formata_nosso_numero(nosso_numero)
-          "#{pagamento.nosso_numero}".adjust_size_to(13, '0', :right)
-        end
-
         def identificador_titulo(nosso_numero)
-          "#{convenio}#{formata_nosso_numero(nosso_numero)}".ljust(20, ' ')
+          nosso_numero.to_s.rjust(13, '0')
         end
 
         # Monta o registro segmento P do arquivo
