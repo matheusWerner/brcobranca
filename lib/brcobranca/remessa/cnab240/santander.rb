@@ -90,9 +90,12 @@ module Brcobranca
           "#{conta_corrente.rjust(12, '0')}#{digito_conta} #{identificador_titulo(pagamento.nosso_numero)}"
         end
 
-        def identificador_titulo(nosso_numero)
+        def formata_nosso_numero(nosso_numero)
           nosso_numero.to_s.rjust(13, '0')
-          nosso_numero.ljust(7, ' ')
+        end
+
+        def identificador_titulo(nosso_numero)
+          "#{formata_nosso_numero(nosso_numero)}".ljust(7, ' ')
         end
 
         # Monta o registro segmento P do arquivo
