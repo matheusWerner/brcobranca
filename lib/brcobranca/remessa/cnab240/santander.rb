@@ -87,7 +87,11 @@ module Brcobranca
           # digito conta            1
           # digito agencia/conta    1
           # ident. titulo no banco  20
-          "#{conta_corrente.rjust(12, '0')}#{digito_conta} #{identificador_titulo(pagamento.nosso_numero)}"
+          "#{conta_corrente.rjust(12, '0')}#{digito_conta} #{identificador_titulo(pagamento.nosso_numero)}#{ajusteNossoNumero}"
+        end
+
+        def ajusteNossoNumero
+          ''.ljust(7, ' ')
         end
 
         def formata_nosso_numero(nosso_numero)
@@ -95,7 +99,7 @@ module Brcobranca
         end
 
         def identificador_titulo(nosso_numero)
-          "#{formata_nosso_numero(nosso_numero).ljust(7, ' ')}"
+          "#{formata_nosso_numero(nosso_numero)}"
         end
 
         # Monta o registro segmento P do arquivo
