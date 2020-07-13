@@ -91,7 +91,7 @@ module Brcobranca
         end
 
         def identificador_titulo(nosso_numero)
-          nosso_numero.to_s.rjust(13, '0')
+          nosso_numero.to_s.rjust(13, '0').ljust(7, ' ')
         end
 
         # Monta o registro segmento P do arquivo
