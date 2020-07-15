@@ -3,6 +3,12 @@ module Brcobranca
   module Remessa
     module Cnab240
       class Santander < Brcobranca::Remessa::Cnab240::Base
+        # variacao da carteira
+        attr_accessor :variacao
+        # identificacao da emissao do boleto (attr na classe base)
+        #   campo nao tratado pelo sistema do Banco do Brasil
+        # identificacao da distribuicao do boleto (attr na classe base)
+        #   campo nao tratado pelo sistema do Banco do Brasil
 
         validates_presence_of :carteira, message: 'não pode estar em branco.'
         validates_presence_of :convenio, message: 'não pode estar em branco.'
