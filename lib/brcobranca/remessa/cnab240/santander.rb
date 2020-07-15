@@ -3,19 +3,12 @@ module Brcobranca
   module Remessa
     module Cnab240
       class Santander < Brcobranca::Remessa::Cnab240::Base
-        # variacao da carteira
-        attr_accessor :variacao
-        # identificacao da emissao do boleto (attr na classe base)
-        #   campo nao tratado pelo sistema do Banco do Brasil
-        # identificacao da distribuicao do boleto (attr na classe base)
-        #   campo nao tratado pelo sistema do Banco do Brasil
 
-        validates_presence_of :carteira, :variacao, message: 'não pode estar em branco.'
+        validates_presence_of :carteira, message: 'não pode estar em branco.'
         validates_presence_of :convenio, message: 'não pode estar em branco.'
         validates_length_of :conta_corrente, maximum: 12, message: 'deve ter 12 dígitos.'
         validates_length_of :agencia, maximum: 4, message: 'deve ter 4 dígitos.'
-        validates_length_of :carteira, is: 2, message: 'deve ter 2 dígitos.'
-        validates_length_of :variacao, is: 3, message: 'deve ter 3 dígitos.'
+        validates_length_of :carteira, is: 1, message: 'deve ter 1 dígito.'
         validates_length_of :convenio, maximum: 7, message: 'deve ter até 7 dígitos.'
 
         def initialize(campos = {})
@@ -51,10 +44,6 @@ module Brcobranca
           # utilizando a conta corrente com 5 digitos
           # para calcular o digito
           conta_corrente.modulo11(mapeamento: { 10 => 'X' }).to_s
-        end
-
-        def codigo_carteira
-          codigo_carteira = carteira[1..2]
         end
 
         def codigo_convenio
@@ -144,7 +133,7 @@ module Brcobranca
           # 2 ou 3 – para carteira 11/17 modalidade Vinculada/Caucionada e carteira 31;
           # 4 – para carteira 11/17 modalidade Descontada e carteira 51;
           # e 7 – para carteira 17 modalidade Simples.
-          segmento_p << codigo_carteira                                 # codigo da carteira                    1
+          segmento_p << carteira                                 # codigo da carteira                    1
           segmento_p << forma_cadastramento                             # forma de cadastro do titulo           1
           segmento_p << tipo_documento                                  # tipo de documento                     1
           segmento_p << emissao_boleto                                  # identificaco emissao                  1
