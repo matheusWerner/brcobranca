@@ -129,27 +129,16 @@ module Brcobranca
           header_lote << documento_cedente.to_s.rjust(15, '0')  # inscricao cedente       15
 
           if cod_banco == '033'
-            header_arquivo << ''.rjust(20, ' ')                   # uso exclusivo           20
-            header_arquivo << codigo_convenio.to_s.rjust(15, '0') # codigo do convenio no banco   15
-            header_arquivo << ''.rjust(5, ' ')                    # uso exclusivo           5
+            header_lote << ''.rjust(20, ' ')                   # uso exclusivo           20
+            header_lote << codigo_convenio.to_s.rjust(15, '0') # codigo do convenio no banco   15
+            header_lote << ''.rjust(5, ' ')                    # uso exclusivo           5
             header_lote << empresa_mae.format_size(30)            # nome empresa            30
             header_lote << mensagem_1.to_s.format_size(40)        # 1a mensagem             40
             header_lote << mensagem_2.to_s.format_size(40)        # 2a mensagem             40
             header_lote << sequencial_remessa.to_s.rjust(8, '0')  # numero remessa          8
             header_lote << data_geracao                           # data gravacao           8
-            header_arquivo << ''.rjust(41, ' ')                   # uso exclusivo           41
+            header_lote << ''.rjust(41, ' ')                   # uso exclusivo           41
           else
-            header_lote = ''                                      # CAMPO                   TAMANHO
-            header_lote << cod_banco                              # codigo banco            3
-            header_lote << nro_lote.to_s.rjust(4, '0')            # lote servico            4
-            header_lote << '1'                                    # tipo de registro        1
-            header_lote << 'R'                                    # tipo de operacao        1
-            header_lote << '01'                                   # tipo de servico         2
-            header_lote << exclusivo_servico                      # uso exclusivo           2
-            header_lote << versao_layout_lote                     # num.versao layout lote  3
-            header_lote << ' '                                    # uso exclusivo           1
-            header_lote << Brcobranca::Util::Empresa.new(documento_cedente, false).tipo # tipo de inscricao       1
-            header_lote << documento_cedente.to_s.rjust(15, '0')  # inscricao cedente       15
             header_lote << convenio_lote                          # codigo do convenio      20
             header_lote << info_conta                             # informacoes conta       20
             header_lote << empresa_mae.format_size(30)            # nome empresa            30
