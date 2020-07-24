@@ -12,10 +12,10 @@ module Brcobranca
 
         validates_presence_of :carteira, message: 'não pode estar em branco.'
         validates_presence_of :convenio, message: 'não pode estar em branco.'
-        validates_length_of :conta_corrente, maximum: 12, message: 'deve ter 12 dígitos.'
+        validates_length_of :conta_corrente, maximum: 9, message: 'deve ter até 9 dígitos.'
         validates_length_of :agencia, maximum: 4, message: 'deve ter 4 dígitos.'
         validates_length_of :carteira, is: 1, message: 'deve ter 1 dígito.'
-        validates_length_of :convenio, maximum: 7, message: 'deve ter até 7 dígitos.'
+        validates_length_of :convenio, maximum: 15, message: 'deve ter até 15 dígitos.'
 
         def initialize(campos = {})
           campos = { emissao_boleto: '0',
@@ -33,7 +33,7 @@ module Brcobranca
         end
 
         def versao_layout_arquivo
-          '030'
+          '040'
         end
 
         def versao_layout_lote
@@ -43,13 +43,13 @@ module Brcobranca
         def digito_agencia
           # utilizando a agencia com 4 digitos
           # para calcular o digito
-          agencia.modulo11(mapeamento: { 10 => 'X' }).to_s
+          agencia.modulo11(mapeamento: { 10 => '0' }).to_s
         end
 
         def digito_conta
           # utilizando a conta corrente com 5 digitos
           # para calcular o digito
-          conta_corrente.modulo11(mapeamento: { 10 => 'X' }).to_s
+          conta_corrente.modulo11(mapeamento: { 10 => '0' }).to_s
         end
 
         def codigo_convenio
@@ -57,20 +57,6 @@ module Brcobranca
         end
 
         alias_method :convenio_lote, :codigo_convenio
-
-        def info_conta
-          # CAMPO                  TAMANHO
-          # agencia                5
-          # digito agencia         1
-          # conta corrente         12
-          # digito conta           1
-          # digito agencia/conta   1
-          "#{agencia.rjust(5, '0')}#{digito_agencia}#{conta_corrente.rjust(12, '0')}#{digito_conta} "
-        end
-
-        def complemento_header
-          ''.rjust(29, ' ')
-        end
 
         def complemento_trailer
           ''.rjust(217, '0')
@@ -82,11 +68,7 @@ module Brcobranca
           # digito conta            1
           # digito agencia/conta    1
           # ident. titulo no banco  20
-          "#{conta_corrente.rjust(12, '0')}#{digito_conta} #{identificador_titulo(pagamento.nosso_numero)}#{ajusteNossoNumero}"
-        end
-
-        def ajusteNossoNumero
-          ''.ljust(7, ' ')
+          "#{conta_corrente.rjust(9, '0')}#{digito_conta}#{conta_corrente.rjust(9, '0')}#{digito_conta}'  '#{identificador_titulo(pagamento.nosso_numero)}"
         end
 
         def formata_nosso_numero(nosso_numero)
@@ -131,7 +113,7 @@ module Brcobranca
           # 31 – Alteração de Outros Dados,
           # 40 – Alteração de Modalidade.
           segmento_p << pagamento.identificacao_ocorrencia              # cod. movimento remessa                2
-          segmento_p << agencia.to_s.rjust(5, '0')                      # agencia                               5
+          segmento_p << agencia.to_s.rjust(4, '0')                      # agencia                               5
           segmento_p << digito_agencia.to_s                             # dv agencia                            1
           segmento_p << complemento_p(pagamento)                        # informacoes da conta                  34
           # Informar:
@@ -142,12 +124,11 @@ module Brcobranca
           segmento_p << carteira                                 # codigo da carteira                    1
           segmento_p << forma_cadastramento                             # forma de cadastro do titulo           1
           segmento_p << tipo_documento                                  # tipo de documento                     1
-          segmento_p << emissao_boleto                                  # identificaco emissao                  1
-          segmento_p << distribuicao_boleto                             # indentificacao entrega                1
+          segmento_p << ''.rjust(2, ' ')                                # uso exclusivo                         2
           segmento_p << numero(pagamento)                               # uso exclusivo                         15
           segmento_p << pagamento.data_vencimento.strftime('%d%m%Y')    # data de venc.                         8
           segmento_p << pagamento.formata_valor(15)                     # valor documento                       15
-          segmento_p << ''.rjust(5, '0')                                # agencia cobradora                     5
+          segmento_p << ''.rjust(4, '0')                                # agencia cobradora                     5
           segmento_p << ' '                                             # dv agencia cobradora                  1
           # Para carteira 11 e 17 modalidade Simples, pode ser usado:
           # 01 – Cheque, 02 – Duplicata Mercantil,
@@ -181,6 +162,7 @@ module Brcobranca
           # Obs.: O Banco do Brasil encaminha para protesto os seguintes títulos:
           # Duplicata Mercantil, Rural e de Serviço, Letra de Câmbio, e
           # Certidão de Dívida Ativa da União, dos Estados e do Município.
+          segmento_p << ' '
           segmento_p << pagamento.especie_titulo.to_s.rjust(2,'0')      # especie do titulo                     2
           segmento_p << aceite                                          # aceite                                1
           segmento_p << pagamento.data_emissao.strftime('%d%m%Y')       # data de emissao titulo                8
@@ -208,10 +190,10 @@ module Brcobranca
           # Para código '3' preencher com Zeros.
           segmento_p << pagamento.dias_protesto.to_s.rjust(2, '0')      # dias para protesto                    2
           segmento_p << '0'                                             # cod. para baixa                       1   *'1' = Protestar Dias Corridos, '2' = Protestar Dias Úteis, '3' = Não Protestar
-          segmento_p << '000'                                           # dias para baixa                       2   *
-          segmento_p << '09'                                            # cod. da moeda                         2
-          segmento_p << ''.rjust(10, '0')                               # uso exclusivo                         10
-          segmento_p << ' '                                             # uso exclusivo                         1
+          segmento_p << '0'                                             # banco                      2   *
+          segmento_p << '00'                                            # dias. para baixa                         2
+          segmento_p << '00'                                            # cod. da moeda                         2
+          segmento_p << ''.rjust(11, ' ')                               # uso exclusivo                         10
           segmento_p
         end
       end
