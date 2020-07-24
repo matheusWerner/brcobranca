@@ -23,6 +23,9 @@ module Brcobranca
       # documento do cedente (CPF/CNPJ)
       attr_accessor :documento_cedente
 
+      #Codigo do banco
+      attr_accessor :codigo_banco
+
       # Validações
       include Brcobranca::Validations
 

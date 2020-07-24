@@ -67,14 +67,14 @@ module Brcobranca
         end
 
 
-        if cod_banco == '033' || cod_banco == '353'
+        if codigo_banco == '033' || codigo_banco == '353'
           # Monta o registro header do arquivo Santander 040
           #
           # @return [String]
           #
           def monta_header_arquivo
             header_arquivo = ''                                   # CAMPO                         TAMANHO
-            header_arquivo << cod_banco                           # codigo do banco               3
+            header_arquivo << cod_banco                        # codigo do banco               3
             header_arquivo << '0000'                              # lote do servico               4
             header_arquivo << '0'                                 # tipo de registro              1
             header_arquivo << ''.rjust(8, ' ')                    # uso exclusivo FEBRABAN        8
@@ -172,7 +172,6 @@ module Brcobranca
             segmento_p << pagamento.codigo_protesto                       # cod. para protesto                    1
             segmento_p << pagamento.dias_protesto.to_s.rjust(2, '0')      # dias para protesto                    2
             segmento_p << codigo_baixa(pagamento)                         # cod. para baixa                       1
-            segmento_p << '0'
             segmento_p << dias_baixa(pagamento)                           # dias para baixa                       2
             segmento_p << '00'                                            # cod. da moeda                         2
             segmento_p << ''.rjust(11, ' ')                               # uso exclusivo                         10
