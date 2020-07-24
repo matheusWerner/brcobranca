@@ -34,7 +34,7 @@ module Brcobranca
         # dias_baixa (verificar o padrao nas classes referentes aos bancos)
         attr_accessor :dias_baixa
 
-        attr_accessor :cod_banco
+        attr_accessor :codigo_banco
 
         validates_presence_of :agencia, :conta_corrente, message: 'não pode estar em branco.'
         validates_presence_of :documento_cedente, message: 'não pode estar em branco.'
@@ -69,7 +69,7 @@ module Brcobranca
         end
 
 
-        if cod_banco == '033' || cod_banco == '353'
+        if codigo_banco == '033' || codigo_banco == '353'
           # Monta o registro header do arquivo Santander 040
           #
           # @return [String]
