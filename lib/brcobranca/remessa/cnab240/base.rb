@@ -34,6 +34,8 @@ module Brcobranca
         # dias_baixa (verificar o padrao nas classes referentes aos bancos)
         attr_accessor :dias_baixa
 
+        attr_accessor :cod_banco
+
         validates_presence_of :agencia, :conta_corrente, message: 'não pode estar em branco.'
         validates_presence_of :documento_cedente, message: 'não pode estar em branco.'
         validates_length_of :codigo_carteira, is: 1, message: 'deve ter 1 dígito.'
@@ -67,14 +69,14 @@ module Brcobranca
         end
 
 
-        if codigo_banco == '033' || codigo_banco == '353'
+        if cod_banco == '033' || cod_banco == '353'
           # Monta o registro header do arquivo Santander 040
           #
           # @return [String]
           #
           def monta_header_arquivo
             header_arquivo = ''                                   # CAMPO                         TAMANHO
-            header_arquivo << cod_banco                        # codigo do banco               3
+            header_arquivo << cod_banco                           # codigo do banco               3
             header_arquivo << '0000'                              # lote do servico               4
             header_arquivo << '0'                                 # tipo de registro              1
             header_arquivo << ''.rjust(8, ' ')                    # uso exclusivo FEBRABAN        8
