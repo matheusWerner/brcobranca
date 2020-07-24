@@ -69,7 +69,7 @@ module Brcobranca
         end
 
 
-        if codigo_banco == '033' || codigo_banco == '353'
+        if cod_banco == '033'
           # Monta o registro header do arquivo Santander 040
           #
           # @return [String]
