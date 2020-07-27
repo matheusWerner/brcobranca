@@ -85,6 +85,7 @@ module Brcobranca
             header_arquivo << data_geracao                        # data geracao                  8
             header_arquivo << ''.rjust(6, ' ')                    # uso exclusivo FEBRABAN        6
             header_arquivo << sequencial_remessa.to_s.rjust(6, '0') # numero seq. arquivo         6
+            header_arquivo << versao_layout_arquivo               # num. versao arquivo           3
             header_arquivo << ''.rjust(74, ' ')                    # uso exclusivo FEBRABAN       6
           else
             header_arquivo << ''.rjust(9, ' ')                    # uso exclusivo FEBRABAN        9

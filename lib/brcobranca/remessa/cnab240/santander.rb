@@ -29,7 +29,7 @@ module Brcobranca
         end
 
         def nome_banco
-          'SANTANDER'.ljust(30, ' ')
+          'Banco Santander'.ljust(30, ' ')
         end
 
         def versao_layout_arquivo
@@ -68,7 +68,7 @@ module Brcobranca
           # digito conta            1
           # digito agencia/conta    1
           # ident. titulo no banco  20
-          "#{conta_corrente.rjust(9, '0')}#{digito_conta}#{conta_corrente.rjust(9, '0')}#{digito_conta}'  '#{identificador_titulo(pagamento.nosso_numero)}"
+          "#{conta_corrente.rjust(9, '0')}#{digito_conta}#{conta_corrente.rjust(9, '0')}#{digito_conta}#{''.rjust(2, ' ')}#{identificador_titulo(pagamento.nosso_numero)}"
         end
 
         def formata_nosso_numero(nosso_numero)
