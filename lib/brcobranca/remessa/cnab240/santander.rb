@@ -53,7 +53,7 @@ module Brcobranca
         end
 
         def codigo_convenio
-          convenio.to_s.rjust(20, '0')
+          convenio.to_s.rjust(15, '0')
         end
 
         alias_method :convenio_lote, :codigo_convenio
