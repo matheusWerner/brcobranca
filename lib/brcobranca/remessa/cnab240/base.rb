@@ -72,7 +72,7 @@ module Brcobranca
           header_arquivo << '0000'                              # lote do servico               4
           header_arquivo << '0'                                 # tipo de registro              1
 
-          if cod_banco == '033'
+          if cod_banco == '033' || cod_banco == '353'
             header_arquivo << ''.rjust(8, ' ')                    # uso exclusivo FEBRABAN        8
             header_arquivo << Brcobranca::Util::Empresa.new(documento_cedente, false).tipo # tipo inscricao                1
             header_arquivo << documento_cedente.to_s.rjust(15, '0') # numero de inscricao         15
@@ -129,7 +129,7 @@ module Brcobranca
           header_lote << Brcobranca::Util::Empresa.new(documento_cedente, false).tipo # tipo de inscricao       1
           header_lote << documento_cedente.to_s.rjust(15, '0')  # inscricao cedente       15
 
-          if cod_banco == '033'
+          if cod_banco == '033' || cod_banco == '353'
             header_lote << ''.rjust(20, ' ')                   # uso exclusivo           20
             header_lote << codigo_convenio.to_s.rjust(15, '0') # codigo do convenio no banco   15
             header_lote << ''.rjust(5, ' ')                    # uso exclusivo           5
@@ -174,7 +174,7 @@ module Brcobranca
           segmento_p << ' '                                             # uso exclusivo                         1
           segmento_p << pagamento.identificacao_ocorrencia              # cod. movimento remessa                2
 
-          if cod_banco == '033'
+          if cod_banco == '033' || cod_banco == '353'
             segmento_p << agencia.to_s.rjust(4, '0')                      # agencia                               5
             segmento_p << digito_agencia.to_s                             # dv agencia                            1
             segmento_p << complemento_p(pagamento)                        # informacoes da conta                  34
@@ -276,7 +276,7 @@ module Brcobranca
           segmento_q << pagamento.documento_avalista.to_s.rjust(15, '0')# documento sacador                    15
           segmento_q << pagamento.nome_avalista.format_size(40)         # nome avalista                        40
 
-          if cod_banco == '033'
+          if cod_banco == '033' || cod_banco == '353'
             segmento_q << ''.rjust(3, '0')                                # identificador do carne               3
             segmento_q << ''.rjust(3, '0')                                # parcela                              3
             segmento_q << ''.rjust(3, '0')                                # quantidade de parcelas               3
@@ -314,11 +314,15 @@ module Brcobranca
           segmento_r << "".rjust(8,  '0')                               # data desconto 2                      8
           segmento_r << "".rjust(15,  '0')                              # valor desconto 2                     15
 
-          if cod_banco == '033'
+          if cod_banco == '033' || cod_banco == '353'
             ''.rjust(24, ' ')                                             # uso exclusivo                        24
             segmento_r << pagamento.codigo_multa                          # codigo multa                         1
             segmento_r << data_multa(pagamento)                           # data multa                           8
             segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15
+            segmento_r << ''.rjust(10, ' ')                               # info pagador                         10
+            segmento_r << ''.rjust(40, ' ')                               # mensagem 3                           40
+            segmento_r << ''.rjust(40, ' ')                               # mensagem 4                           40
+            segmento_r << complemento_r                                   # complemento de acordo com o banco    61
           else
             segmento_r << "0"                                             # cod. desconto 3                      1
             segmento_r << "".rjust(8,  '0')                               # data desconto 3                      8
@@ -326,12 +330,11 @@ module Brcobranca
             segmento_r << pagamento.codigo_multa                          # codigo multa                         1
             segmento_r << data_multa(pagamento)                           # data multa                           8
             segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15
+            segmento_r << ''.rjust(10, ' ')                               # info pagador                         10
+            segmento_r << ''.rjust(40, ' ')                               # mensagem 3                           40
+            segmento_r << ''.rjust(40, ' ')                               # mensagem 4                           40
+            segmento_r << complemento_r                                   # complemento de acordo com o banco    61
           end
-
-          segmento_r << ''.rjust(10, ' ')                               # info pagador                         10
-          segmento_r << ''.rjust(40, ' ')                               # mensagem 3                           40
-          segmento_r << ''.rjust(40, ' ')                               # mensagem 4                           40
-          segmento_r << complemento_r                                   # complemento de acordo com o banco    61
           segmento_r
         end
 
