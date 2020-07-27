@@ -318,11 +318,7 @@ module Brcobranca
             segmento_r << ''.rjust(24, ' ')                               # uso exclusivo FEBRABAN              24
             segmento_r << pagamento.codigo_multa                          # codigo multa                         1
             segmento_r << data_multa(pagamento)                           # data multa                           8
-            segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15
-            segmento_r << ''.rjust(10, ' ')                               # info pagador                         10
-            segmento_r << ''.rjust(40, ' ')                               # mensagem 3                           40
-            segmento_r << ''.rjust(40, ' ')                               # mensagem 4                           40
-            segmento_r << complemento_r                                   # complemento de acordo com o banco    61
+            segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15            
           else
             segmento_r << "0"                                             # cod. desconto 3                      1
             segmento_r << "".rjust(8,  '0')                               # data desconto 3                      8
@@ -330,11 +326,12 @@ module Brcobranca
             segmento_r << pagamento.codigo_multa                          # codigo multa                         1
             segmento_r << data_multa(pagamento)                           # data multa                           8
             segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15
-            segmento_r << ''.rjust(10, ' ')                               # info pagador                         10
-            segmento_r << ''.rjust(40, ' ')                               # mensagem 3                           40
-            segmento_r << ''.rjust(40, ' ')                               # mensagem 4                           40
-            segmento_r << complemento_r                                   # complemento de acordo com o banco    61
           end
+
+          segmento_r << ''.rjust(10, ' ')                               # info pagador                         10
+          segmento_r << ''.rjust(40, ' ')                               # mensagem 3                           40
+          segmento_r << ''.rjust(40, ' ')                               # mensagem 4                           40
+          segmento_r << complemento_r                                   # complemento de acordo com o banco    61
           segmento_r
         end
 

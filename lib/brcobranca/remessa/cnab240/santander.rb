@@ -62,6 +62,10 @@ module Brcobranca
           ''.rjust(217, ' ')
         end
 
+        def complemento_r
+          ''.rjust(61, ' ')
+        end
+
         def complemento_p(pagamento)
           # CAMPO                   TAMANHO
           # conta corrente          12
