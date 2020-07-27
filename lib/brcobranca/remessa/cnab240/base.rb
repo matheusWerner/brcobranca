@@ -315,7 +315,7 @@ module Brcobranca
           segmento_r << "".rjust(15,  '0')                              # valor desconto 2                     15
 
           if cod_banco == '033' || cod_banco == '353'
-            ''.rjust(24, ' ')                                             # uso exclusivo                        24
+            segmento_r << ''.rjust(24, ' ')                               # uso exclusivo FEBRABAN              24
             segmento_r << pagamento.codigo_multa                          # codigo multa                         1
             segmento_r << data_multa(pagamento)                           # data multa                           8
             segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15
