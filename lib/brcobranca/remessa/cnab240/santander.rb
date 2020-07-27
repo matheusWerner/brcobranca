@@ -59,7 +59,7 @@ module Brcobranca
         alias_method :convenio_lote, :codigo_convenio
 
         def complemento_trailer
-          ''.rjust(217, '0')
+          ''.rjust(217, ' ')
         end
 
         def complemento_p(pagamento)

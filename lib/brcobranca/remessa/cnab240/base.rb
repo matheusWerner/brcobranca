@@ -313,12 +313,21 @@ module Brcobranca
           segmento_r << "0"                                             # cod. desconto 2                      1
           segmento_r << "".rjust(8,  '0')                               # data desconto 2                      8
           segmento_r << "".rjust(15,  '0')                              # valor desconto 2                     15
-          segmento_r << "0"                                             # cod. desconto 3                      1
-          segmento_r << "".rjust(8,  '0')                               # data desconto 3                      8
-          segmento_r << "".rjust(15,  '0')                              # valor desconto 3                     15
-          segmento_r << pagamento.codigo_multa                          # codigo multa                         1
-          segmento_r << data_multa(pagamento)                           # data multa                           8
-          segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15
+
+          if cod_banco == '033'
+            ''.rjust(24, ' ')                                             # uso exclusivo                        24
+            segmento_r << pagamento.codigo_multa                          # codigo multa                         1
+            segmento_r << data_multa(pagamento)                           # data multa                           8
+            segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15
+          else
+            segmento_r << "0"                                             # cod. desconto 3                      1
+            segmento_r << "".rjust(8,  '0')                               # data desconto 3                      8
+            segmento_r << "".rjust(15,  '0')                              # valor desconto 3                     15
+            segmento_r << pagamento.codigo_multa                          # codigo multa                         1
+            segmento_r << data_multa(pagamento)                           # data multa                           8
+            segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15
+          end
+
           segmento_r << ''.rjust(10, ' ')                               # info pagador                         10
           segmento_r << ''.rjust(40, ' ')                               # mensagem 3                           40
           segmento_r << ''.rjust(40, ' ')                               # mensagem 4                           40
