@@ -125,7 +125,7 @@ module Brcobranca
           # 2 ou 3 – para carteira 11/17 modalidade Vinculada/Caucionada e carteira 31;
           # 4 – para carteira 11/17 modalidade Descontada e carteira 51;
           # e 7 – para carteira 17 modalidade Simples.
-          segmento_p << carteira                                 # codigo da carteira                    1
+          segmento_p << carteira                                        # codigo da carteira                    1
           segmento_p << forma_cadastramento                             # forma de cadastro do titulo           1
           segmento_p << tipo_documento                                  # tipo de documento                     1
           segmento_p << ''.rjust(2, ' ')                                # uso exclusivo                         2
