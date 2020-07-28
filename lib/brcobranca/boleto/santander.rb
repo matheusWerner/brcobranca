@@ -77,7 +77,7 @@ module Brcobranca
       #
       # @return [String] 25 caracteres numéricos.
       def codigo_barras_segunda_parte
-        "9#{convenio}00000#{nosso_numero}#{nosso_numero_dv}0#{carteira}"
+        "9#{convenio}#{nosso_numero}#{nosso_numero_dv}0#{carteira}"
       end
     end
   end
