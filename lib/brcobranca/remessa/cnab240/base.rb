@@ -314,7 +314,7 @@ module Brcobranca
           if cod_banco == '033' || cod_banco == '353'
             segmento_r << codigo_segundo_desconto(pagamento)              # cod. desconto 2                      1
             segmento_r << pagamento.formata_data_segundo_desconto('%d%m%Y') # data desconto 2                    8
-            segmento_p << pagamento.formata_valor_segundo_desconto(15)    # valor desconto                       15
+            segmento_r << pagamento.formata_valor_segundo_desconto(15)    # valor desconto                       15
             segmento_r << ''.rjust(24, ' ')                               # uso exclusivo FEBRABAN              24
             segmento_r << pagamento.codigo_multa                          # codigo multa                         1
             segmento_r << data_multa(pagamento)                           # data multa                           8

@@ -113,6 +113,7 @@ module Brcobranca
           valor_abatimento: 0.0,
           nome_avalista: '',
           cod_desconto: '0',
+          cod_segundo_desconto:'0',
           especie_titulo: '01',
           identificacao_ocorrencia: '01',
           codigo_multa: '0',
