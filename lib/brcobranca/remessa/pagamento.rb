@@ -57,6 +57,8 @@ module Brcobranca
       attr_accessor :numero
       # <b>OPCIONAL</b>: Número utilizado para controle do beneficiário/cedente
       attr_accessor :documento
+      # <b>OPCIONAL</b>: codigo do segundo desconto (para CNAB240)
+      attr_accessor :cod_segundo_desconto
       # <b>OPCIONAL</b>: data limite para o desconto
       attr_accessor :data_segundo_desconto
       # <b>OPCIONAL</b>: valor a ser concedido de desconto
