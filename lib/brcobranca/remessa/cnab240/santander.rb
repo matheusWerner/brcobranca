@@ -40,18 +40,6 @@ module Brcobranca
           '030'
         end
 
-        def digito_agencia
-          # utilizando a agencia com 4 digitos
-          # para calcular o digito
-          agencia.modulo11(mapeamento: { 10 => '0' }).to_s
-        end
-
-        def digito_conta
-          # utilizando a conta corrente com 5 digitos
-          # para calcular o digito
-          conta_corrente.modulo11(mapeamento: { 10 => '0' }).to_s
-        end
-
         def codigo_convenio
           convenio.to_s.rjust(15, '0')
         end
@@ -72,7 +60,7 @@ module Brcobranca
           # digito conta            1
           # digito agencia/conta    1
           # ident. titulo no banco  20
-          "#{conta_corrente.rjust(9, '0')}#{digito_conta}#{conta_corrente.rjust(9, '0')}#{digito_conta}#{''.rjust(2, ' ')}#{identificador_titulo(pagamento.nosso_numero)}"
+          "#{conta_corrente.rjust(9, '0')}#{digito_conta.rjust(1, '0')}#{conta_corrente.rjust(9, '0')}#{digito_conta.rjust(1, '0')}#{''.rjust(2, ' ')}#{identificador_titulo(pagamento.nosso_numero)}"
         end
 
         def formata_nosso_numero(nosso_numero)
@@ -118,7 +106,7 @@ module Brcobranca
           # 40 – Alteração de Modalidade.
           segmento_p << pagamento.identificacao_ocorrencia              # cod. movimento remessa                2
           segmento_p << agencia.to_s.rjust(4, '0')                      # agencia                               5
-          segmento_p << digito_agencia.to_s                             # dv agencia                            1
+          segmento_p << digito_agencia.rjust(1, '0')                    # dv agencia                            1
           segmento_p << complemento_p(pagamento)                        # informacoes da conta                  34
           # Informar:
           # 1 – para carteira 11/12 na modalidade Simples;
