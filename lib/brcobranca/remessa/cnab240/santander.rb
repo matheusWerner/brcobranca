@@ -62,7 +62,7 @@ module Brcobranca
           # digito conta            1
           # digito agencia/conta    1
           # ident. titulo no banco  20
-          "#{conta_corrente.rjust(9, '0')}#{digito_conta.rjust(1, '0')}#{conta_corrente.rjust(9, '0')}#{digito_conta.rjust(1, '0')}#{''.rjust(2, ' ')}#{identificador_titulo(pagamento.nosso_numero)}"
+          "#{conta_corrente.rjust(9, '0')}#{digito_conta}#{conta_corrente.rjust(9, '0')}#{digito_conta}#{''.rjust(2, ' ')}#{identificador_titulo(pagamento.nosso_numero)}"
         end
 
         def formata_nosso_numero(nosso_numero)
@@ -71,6 +71,13 @@ module Brcobranca
 
         def identificador_titulo(nosso_numero)
           "#{formata_nosso_numero(nosso_numero)}"
+        end
+
+        # Identificacao do titulo da empresa
+        #
+        # Sobreescreva caso necessário
+        def numero(pagamento)
+          pagamento.formata_documento_ou_numero(15, ' ')
         end
 
         # Monta o registro segmento P do arquivo
@@ -108,7 +115,7 @@ module Brcobranca
           # 40 – Alteração de Modalidade.
           segmento_p << pagamento.identificacao_ocorrencia              # cod. movimento remessa                2
           segmento_p << agencia.to_s.rjust(4, '0')                      # agencia                               5
-          segmento_p << digito_agencia.rjust(1, '0')                    # dv agencia                            1
+          segmento_p << digito_agencia                                  # dv agencia                            1
           segmento_p << complemento_p(pagamento)                        # informacoes da conta                  34
           # Informar:
           # 1 – para carteira 11/12 na modalidade Simples;

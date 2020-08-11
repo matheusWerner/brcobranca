@@ -182,7 +182,7 @@ module Brcobranca
             segmento_p << forma_cadastramento                             # forma de cadastro do titulo           1
             segmento_p << tipo_documento                                  # tipo de documento                     1
             segmento_p << ''.rjust(2, ' ')                                # uso exclusivo                         2
-            segmento_p << numero(pagamento)                               # uso exclusivo                         4
+            segmento_p << numero(pagamento)                               # uso exclusivo                         15
             segmento_p << pagamento.data_vencimento.strftime('%d%m%Y')    # data de venc.                         8
             segmento_p << pagamento.formata_valor(15)                     # valor documento                       15
             segmento_p << ''.rjust(4, '0')                                # agencia cobradora                     4
