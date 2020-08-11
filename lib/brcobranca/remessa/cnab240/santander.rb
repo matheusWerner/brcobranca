@@ -5,6 +5,8 @@ module Brcobranca
       class Santander < Brcobranca::Remessa::Cnab240::Base
         # variacao da carteira
         attr_accessor :variacao
+
+        attr_accessor :digito_agencia
         # identificacao da emissao do boleto (attr na classe base)
         #   campo nao tratado pelo sistema do Banco do Brasil
         # identificacao da distribuicao do boleto (attr na classe base)
