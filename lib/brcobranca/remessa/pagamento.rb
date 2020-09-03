@@ -119,7 +119,7 @@ module Brcobranca
           codigo_multa: '0',
           percentual_multa: 0.0,
           parcela: '01',
-          codigo_protesto: '3',
+          codigo_protesto: '0',
           dias_protesto: '00',
           codigo_baixa: '0',
           dias_baixa: '000',
