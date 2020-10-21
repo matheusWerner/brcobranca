@@ -129,6 +129,7 @@ module Brcobranca
         when 198, 106, 107, 122, 142, 143, 195, 196
           dv = "#{carteira}#{nosso_numero}#{seu_numero}#{convenio}".modulo10
           dac = 10 - dv;
+          raise "#{carteira}#{nosso_numero}#{seu_numero}#{convenio}#{dac}0"
           "#{carteira}#{nosso_numero}#{seu_numero}#{convenio}#{dac}0"
         else
           "#{carteira}#{nosso_numero}#{nosso_numero_dv}#{agencia}#{conta_corrente}#{agencia_conta_corrente_dv}000"
