@@ -54,6 +54,8 @@ module Brcobranca
         else
           numero = '0'
 
+          raise "#{numero}"
+
         @seu_numero = numero.to_s.rjust(7, '0') if numero
       end
 
