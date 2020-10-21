@@ -49,7 +49,12 @@ module Brcobranca
       # Número seqüencial utilizado para identificar o boleto.
       # @return [String] 7 caracteres numéricos.
       def seu_numero=(valor)
-        @seu_numero = valor.to_s.rjust(7, '0') if valor
+        if (%w(198 106 107 122 142 143 195 196).include?(carteira.to_s))
+          numero = documento_numero.somente_numeros.rjust(1,'0')
+        else
+          numero = '0'
+
+        @seu_numero = numero.to_s.rjust(7, '0') if numero
       end
 
       def usa_seu_numero?
