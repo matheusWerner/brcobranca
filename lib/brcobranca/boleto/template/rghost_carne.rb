@@ -283,7 +283,7 @@ module Brcobranca
 
           # Instruções
           doc.moveto x: colunas[2], y: linhas[5]
-          doc.show boleto.instrucao1
+          doc.show boleto.instrucao1.to_s
           doc.moveto x: colunas[2], y: linhas[6]
           doc.show boleto.instrucao2
           doc.moveto x: colunas[2], y: linhas[7]
