@@ -261,7 +261,7 @@ module Brcobranca
             move_more(doc, 0, -2)
           else
             move_more(doc, -15.8, -0.9)
-            doc.show boleto.instrucao1
+            doc.show boleto.instrucao1.replace('R$Â', 'R$')
 
             move_more(doc, 0, -0.4)
             doc.show boleto.instrucao2
