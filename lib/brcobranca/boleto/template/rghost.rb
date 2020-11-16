@@ -261,7 +261,12 @@ module Brcobranca
             move_more(doc, 0, -2)
           else
             move_more(doc, -15.8, -0.9)
-            doc.show boleto.instrucao1.encoding
+
+            ins1 = boleto.instrucao1
+            encoded = ins1.encode("ascii", "ignore")
+
+            doc.show encoded
+            doc.show __ENCODING__
 
             move_more(doc, 0, -0.4)
             doc.show boleto.instrucao2
