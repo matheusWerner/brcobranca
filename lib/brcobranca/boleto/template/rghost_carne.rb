@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# encoding: ISO-8859-1
 
 begin
   require 'rghost'
