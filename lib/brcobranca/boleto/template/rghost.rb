@@ -262,11 +262,8 @@ module Brcobranca
           else
             move_more(doc, -15.8, -0.9)
 
-            ins1 = boleto.instrucao1
-            encoded = ins1.decode('UTF-8')
-
-            doc.show encoded
-            doc.show __ENCODING__
+            raise boleto.instrucao1
+            doc.show boleto.instrucao1
 
             move_more(doc, 0, -0.4)
             doc.show boleto.instrucao2

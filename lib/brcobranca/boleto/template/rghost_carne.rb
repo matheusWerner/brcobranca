@@ -284,11 +284,9 @@ module Brcobranca
           # Instruções
           doc.moveto x: colunas[2], y: linhas[5]
 
-          ins1 = boleto.instrucao1
-          encoded = ins1.decode('UTF-8')
-
-          doc.show encoded
-          doc.show __ENCODING__
+          raise boleto.instrucao1
+          doc.show boleto.instrucao1
+          
           doc.moveto x: colunas[2], y: linhas[6]
           doc.show boleto.instrucao2
           doc.moveto x: colunas[2], y: linhas[7]
