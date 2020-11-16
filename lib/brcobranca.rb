@@ -80,7 +80,7 @@ module Brcobranca
       self.gerador = :rghost
       self.formato = :pdf
       self.resolucao = 150
-      self.external_encoding = 'UTF-16BE'
+      self.external_encoding = 'Windows-1252'
     end
   end
 
