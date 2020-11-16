@@ -263,7 +263,7 @@ module Brcobranca
             move_more(doc, -15.8, -0.9)
 
             ins1 = boleto.instrucao1
-            encoded = ins1.encode('iso-8859-1').decode('utf-8')
+            encoded = ins1.decode('UTF-8')
 
             doc.show encoded
             doc.show __ENCODING__
