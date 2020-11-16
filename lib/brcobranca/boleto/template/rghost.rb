@@ -261,8 +261,6 @@ module Brcobranca
             move_more(doc, 0, -2)
           else
             move_more(doc, -15.8, -0.9)
-
-            raise boleto.instrucao1
             doc.show boleto.instrucao1
 
             move_more(doc, 0, -0.4)
