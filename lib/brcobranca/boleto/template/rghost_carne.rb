@@ -1,4 +1,6 @@
-# -*- encoding: utf-8 -*-
+# encoding: utf-8
+# encoding: iso-8859-1
+# encoding: win-1252
 
 begin
   require 'rghost'
@@ -283,7 +285,7 @@ module Brcobranca
 
           # Instruções
           doc.moveto x: colunas[2], y: linhas[5]
-          doc.show boleto.instrucao1.replace('R$Â', 'R$')
+          doc.show boleto.instrucao1
           doc.moveto x: colunas[2], y: linhas[6]
           doc.show boleto.instrucao2
           doc.moveto x: colunas[2], y: linhas[7]
