@@ -50,11 +50,10 @@ module Brcobranca
 
         def identificacao_empresa
           # identificacao da empresa no banco
-          identificacao = '0'                            # vazio                       [1]
-          identificacao << carteira.to_s.rjust(3, '0')   # carteira                    [3]
-          identificacao << agencia                       # codigo da agencia (sem dv)  [5]
-          identificacao << conta_corrente                # codigo da conta             [7]
-          identificacao << digito_conta                  # digito da conta             [1]
+          identificacao = '0'                                               # vazio                       [1]
+          identificacao << carteira.to_s.rjust(3, '0')                      # carteira                    [3]
+          identificacao << agencia                                          # codigo da agencia (sem dv)  [5]
+          identificacao << conta_corrente.to_s.rjust(8, '0')                # codigo da conta             [8]
         end
 
         def digito_nosso_numero(nosso_numero)
@@ -78,11 +77,11 @@ module Brcobranca
           raise Brcobranca::RemessaInvalida, pagamento if pagamento.invalid?
 
           detalhe = '1'                                               # identificacao do registro                   9[01]       001 a 001
-          detalhe << ''.rjust(5, '0')                                 # agencia de debito (op)                      9[05]       002 a 006
-          detalhe << ''.rjust(1, '0')                                 # digito da agencia de debito (op)            X[01]       007 a 007
-          detalhe << ''.rjust(5, '0')                                 # razao da conta corrente de debito (op)      9[05]       008 a 012
-          detalhe << ''.rjust(7, '0')                                 # conta corrente (op)                         9[07]       013 a 019
-          detalhe << ''.rjust(1, '0')                                 # digito da conta corrente (op)               X[01]       020 a 020
+          detalhe << ''.rjust(5, ' ')                                 # agencia de debito (op)                      9[05]       002 a 006
+          detalhe << ''.rjust(1, ' ')                                 # digito da agencia de debito (op)            X[01]       007 a 007
+          detalhe << ''.rjust(5, ' ')                                 # razao da conta corrente de debito (op)      9[05]       008 a 012
+          detalhe << ''.rjust(7, ' ')                                 # conta corrente (op)                         9[07]       013 a 019
+          detalhe << ''.rjust(1, ' ')                                 # digito da conta corrente (op)               X[01]       020 a 020
           detalhe << identificacao_empresa                            # identficacao da empresa                     X[17]       021 a 037
           detalhe << pagamento.documento_ou_numero.to_s.ljust(25, ' ')   # num. controle                               X[25]       038 a 062
           detalhe << ''.rjust(3, '0')                                 # codigo do banco (debito automatico apenas)  9[03]       063 a 065
