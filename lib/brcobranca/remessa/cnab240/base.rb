@@ -45,7 +45,7 @@ module Brcobranca
           campos = {
             codigo_carteira: '1',
             forma_cadastramento: '1',
-            tipo_documento: ' '
+            tipo_documento: '1'
           }.merge!(campos)
           super(campos)
         end
@@ -315,7 +315,9 @@ module Brcobranca
             segmento_r << codigo_segundo_desconto(pagamento)              # cod. desconto 2                      1
             segmento_r << pagamento.formata_data_segundo_desconto('%d%m%Y') # data desconto 2                    8
             segmento_r << pagamento.formata_valor_segundo_desconto(15)    # valor desconto                       15
-            segmento_r << ''.rjust(24, ' ')                               # uso exclusivo FEBRABAN              24
+            segmento_r << '0'                                             # cod. desconto 3                      1
+            segmento_r << ''.rjust(8,  '0')                               # data desconto 3                      8
+            segmento_r << ''.rjust(15,  '0')                              # valor desconto 3                     15
             segmento_r << pagamento.codigo_multa                          # codigo multa                         1
             segmento_r << data_multa(pagamento)                           # data multa                           8
             segmento_r << pagamento.formata_percentual_multa(15)          # valor multa                          15
